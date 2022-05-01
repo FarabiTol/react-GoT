@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Char from './components/Char'
+import {Routes, Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      loading: true,
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({loading: false})
+    }, 2500);
+  }
+
+  render() {
+   return this.state.loading ? (
+     <h6 className="loading">Loading...</h6>
+   ) : (
+     <div className="App">
+       <Routes>
+         <Route exact path="/" element={<Char />} />
+         <Route exact path="*" element={<Char />} />
+       </Routes>
+     </div>
+   );
+  }
+
 }
 
 export default App;
